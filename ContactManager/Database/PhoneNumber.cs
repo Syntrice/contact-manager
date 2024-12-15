@@ -15,6 +15,6 @@ namespace ContactManager.Database
         public Contact Contact { get; set; } = null!;
 
         // Navigation property
-        public PhoneNumberCategory Category { get; set; } = PhoneNumberCategory.Other;
+        public PhoneNumberCategory Category { get; set; } = null!;
     }
 }

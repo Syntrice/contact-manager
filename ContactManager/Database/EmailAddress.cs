@@ -15,6 +15,6 @@ namespace ContactManager.Database
         public Contact Contact { get; set; } = null!;
 
         // Navigation property
-        public EmailAddressCategory Category { get; set; } = EmailAddressCategory.Other;
+        public EmailAddressCategory Category { get; set; } = null!;
     }
 }
