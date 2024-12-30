@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Model
 {
-    public class ContactDatabase : DbContext
+    public class ContactDatabaseContext : DbContext
     {
         public string DbPath { get; }
 
@@ -17,7 +17,7 @@ namespace ContactManager.Model
 
         public DbSet<EmailAddressCategory> EmailAddressCategories { get; set; } = null!;
 
-        public ContactDatabase(DatabaseOptions databaseOptions)
+        public ContactDatabaseContext(DatabaseOptions databaseOptions)
         {
             DbPath = databaseOptions.DatabasePath;
         }

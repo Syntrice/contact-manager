@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContactManager.Migrations
 {
-    [DbContext(typeof(ContactDatabase))]
+    [DbContext(typeof(ContactDatabaseContext))]
     partial class ContactDatabaseModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

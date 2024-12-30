@@ -6,7 +6,7 @@ using ContactManager.Model;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName)); 
-builder.Services.AddDbContext<ContactDatabase>();
+builder.Services.AddDbContext<ContactDatabaseContext>();
 IHost host = builder.Build();
 host.Run();
 
