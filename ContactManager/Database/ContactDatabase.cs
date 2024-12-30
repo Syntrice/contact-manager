@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ContactManager.Options;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Database
 {
@@ -16,11 +17,9 @@ namespace ContactManager.Database
 
         public DbSet<EmailAddressCategory> EmailAddressCategories { get; set; } = null!;
 
-        public ContactDatabase()
+        public ContactDatabase(DatabaseOptions databaseOptions)
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = Path.Combine(path, "contacts.db");
+            DbPath = databaseOptions.DatabasePath;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -39,19 +38,6 @@ namespace ContactManager.Database
             {
                 e.HasData(PhoneNumberCategory.GetDefaultPhoneNumberCategories());
             });
-        }
-
-        public static void ApplyMigrations()
-        {
-            /*
-            TODO:
-                - call backup database method here
-                - handle corrupted database
-             */
-            using (var db = new ContactDatabase())
-            {
-                db.Database.Migrate();
-            }
         }
     }
 }
