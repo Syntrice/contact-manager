@@ -2,11 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using ContactManager.Options;
 using ContactManager.Model;
+using ContactManager.Services;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName)); 
 builder.Services.AddDbContext<ContactDatabaseContext>();
+builder.Services.AddHostedService<DatabaseManagmentService>();
 IHost host = builder.Build();
 host.Run();
 
