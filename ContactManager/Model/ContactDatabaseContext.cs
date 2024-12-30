@@ -1,11 +1,12 @@
 ﻿using ContactManager.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace ContactManager.Model
 {
     public class ContactDatabaseContext : DbContext
     {
-        public string DbPath { get; }
+        private DatabaseOptions _options;
 
         public DbSet<Contact> Contacts { get; set; } = null!;
 
@@ -17,14 +18,14 @@ namespace ContactManager.Model
 
         public DbSet<EmailAddressCategory> EmailAddressCategories { get; set; } = null!;
 
-        public ContactDatabaseContext(DatabaseOptions databaseOptions)
+        public ContactDatabaseContext(IOptions<DatabaseOptions> databaseOptions)
         {
-            DbPath = databaseOptions.DatabasePath;
+            _options = databaseOptions.Value;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite($"Data Source={DbPath}");
+            options.UseSqlite($"Data Source={_options.DatabasePath}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
