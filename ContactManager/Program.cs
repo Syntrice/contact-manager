@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using ContactManager.Options;
-using ContactManager.Database;
+using ContactManager.Model;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 

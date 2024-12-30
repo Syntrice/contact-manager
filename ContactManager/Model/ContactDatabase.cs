@@ -1,7 +1,7 @@
 ﻿using ContactManager.Options;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContactManager.Database
+namespace ContactManager.Model
 {
     public class ContactDatabase : DbContext
     {
