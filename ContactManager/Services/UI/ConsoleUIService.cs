@@ -1,8 +1,8 @@
-﻿using ContactManager.UI.States;
+﻿using ContactManager.Services.UI.States;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ContactManager.UI
+namespace ContactManager.Services.UI
 {
     public class ConsoleUIService : BackgroundService, IUIStateController
     {

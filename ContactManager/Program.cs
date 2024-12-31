@@ -1,8 +1,8 @@
 ﻿using ContactManager.Model;
 using ContactManager.Options;
 using ContactManager.Services;
-using ContactManager.UI;
-using ContactManager.UI.States;
+using ContactManager.Services.UI;
+using ContactManager.Services.UI.States;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

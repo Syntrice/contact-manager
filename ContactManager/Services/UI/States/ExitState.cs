@@ -1,4 +1,6 @@
-﻿namespace ContactManager.UI.States
+﻿using ContactManager.Services.UI;
+
+namespace ContactManager.Services.UI.States
 {
     public class ExitState : IUIState
     {
