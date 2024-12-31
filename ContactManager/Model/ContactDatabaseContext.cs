@@ -4,7 +4,17 @@ using Microsoft.Extensions.Options;
 
 namespace ContactManager.Model
 {
-    public class ContactDatabaseContext : DbContext
+    public interface IContactDatabaseContext
+    {
+        DbSet<Contact> Contacts { get; set; }
+        DbSet<EmailAddressCategory> EmailAddressCategories { get; set; }
+        DbSet<EmailAddress> Emails { get; set; }
+        DbSet<PhoneNumberCategory> PhoneNumberCategories { get; set; }
+        DbSet<PhoneNumber> PhoneNumbers { get; set; }
+        public Task Migrate();
+    }
+
+    public class ContactDatabaseContext : DbContext, IContactDatabaseContext
     {
         private DatabaseOptions _options;
 
@@ -39,6 +49,11 @@ namespace ContactManager.Model
             {
                 e.HasData(PhoneNumberCategory.GetDefaultPhoneNumberCategories());
             });
+        }
+
+        public async Task Migrate()
+        {
+            await Database.MigrateAsync();
         }
     }
 }

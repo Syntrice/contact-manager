@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName)); 
-builder.Services.AddDbContext<ContactDatabaseContext>();
+builder.Services.AddDbContext<IContactDatabaseContext, ContactDatabaseContext>();
 builder.Services.AddHostedService<DatabaseManagmentService>();
 builder.Services.AddHostedService<ConsoleUIService>();
 builder.Services.AddTransient<IUIState, MainMenuState>();

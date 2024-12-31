@@ -7,10 +7,10 @@ namespace ContactManager.Services
 {
     public class DatabaseManagmentService : IHostedService
     {
-        private readonly ContactDatabaseContext _dbContext;
+        private readonly IContactDatabaseContext _dbContext;
         private readonly ILogger _logger;
 
-        public DatabaseManagmentService(ContactDatabaseContext context, ILogger<DatabaseManagmentService> logger)
+        public DatabaseManagmentService(IContactDatabaseContext context, ILogger<DatabaseManagmentService> logger)
         {
             _dbContext = context;
             _logger = logger;
@@ -28,10 +28,9 @@ namespace ContactManager.Services
             _logger.LogInformation("Attempting to migrate ContactDatabase");
 
             // todo: error handling
-            await _dbContext.Database.MigrateAsync();
+            await _dbContext.Migrate();
 
             _logger.LogInformation("Migration completed");
-
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
