@@ -7,56 +7,37 @@ namespace ContactManager.Services
 {
     public class DatabaseManagmentService : IHostedService
     {
-        private readonly IHostApplicationLifetime _appLifetime;
         private readonly ContactDatabaseContext _dbContext;
         private readonly ILogger _logger;
 
-        public DatabaseManagmentService(ContactDatabaseContext context, ILogger<DatabaseManagmentService> logger, IHostApplicationLifetime lifetime)
+        public DatabaseManagmentService(ContactDatabaseContext context, ILogger<DatabaseManagmentService> logger)
         {
             _dbContext = context;
             _logger = logger;
-            _appLifetime = lifetime;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("DatabaseManagementService: StartAsync has been called");
-
-            _appLifetime.ApplicationStarted.Register(OnApplicationStarted);
-            _appLifetime.ApplicationStopping.Register(OnApplicationStopping);
-            _appLifetime.ApplicationStopped.Register(OnApplicationStoped);
-
-            return Task.CompletedTask;
+            _logger.LogInformation("StartAsync has been called");
+            await MigrateDatabaseAsync();
         }
 
-        public void OnApplicationStarted()
-        {
-            _logger.LogInformation("DatabaseManagementService: OnApplicationStarted has been called");
-            MigrateDatabase();
-        }
 
-        private void MigrateDatabase()
+        private async Task MigrateDatabaseAsync()
         {
-            _logger.LogInformation("DatabaseManagementService: Attempting to migrate ContactDatabase");
+            _logger.LogInformation("Attempting to migrate ContactDatabase");
 
             // todo: error handling
-            _dbContext.Database.Migrate();
+            await _dbContext.Database.MigrateAsync();
+
+            _logger.LogInformation("Migration completed");
+
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("DatabaseManagementService StopAsync has been called");
+            _logger.LogInformation("StopAsync has been called");
             return Task.CompletedTask;
-        }
-
-        public void OnApplicationStopping()
-        {
-            _logger.LogInformation("DatabaseManagementService: OnApplicationStopping has been called");
-        }
-
-        public void OnApplicationStoped()
-        {
-            _logger.LogInformation("DatabaseManagementService: OnApplicationStoped has been called");
         }
     }
 }
