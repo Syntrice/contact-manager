@@ -5,25 +5,42 @@ namespace ContactManager.UI
 {
     public class ConsoleUIService : BackgroundService, IUIStateController
     {
-        private IUIState _currentState;
-        private IUIStateFactory _stateFactory;
+        private readonly IEnumerable<IUIState> _uiStates;
+        private bool _isRunning;
+        private IUIState _currentState = null!;
 
-        public ConsoleUIService(IUIStateFactory stateFactory)
+        public ConsoleUIService(IEnumerable<IUIState> uiStates)
         {
-           _currentState = stateFactory.GetInstance<MainMenuState>();
-           _stateFactory = stateFactory;
+            _uiStates = uiStates;
+            SetState<MainMenuState>();
         }
 
-        public Task SetState<State>() where State : IUIState
+        public void SetState<State>() where State : IUIState
         {
-            _currentState = _stateFactory.GetInstance<State>();
-            return _currentState.ExecuteAsync(this, CancellationToken.None);
+            IUIState? instance = _uiStates.OfType<State>().FirstOrDefault();
+            if (instance == null)
+            {
+                throw new InvalidOperationException($"No IUIState dependency of type {typeof(State).Name} found.");
+            }
+            else
+            {
+                _currentState = instance;
+            }
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _currentState.ExecuteAsync(this, stoppingToken);
+            _isRunning = true;
+            while (_isRunning)
+            {
+                _currentState.Execute(this, stoppingToken);
+            }
             return Task.CompletedTask;
+        }
+
+        public void Stop()
+        {
+            _isRunning = false;
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace ContactManager.UI
+﻿using ContactManager.UI.States;
+
+namespace ContactManager.UI
 {
     public interface IUIStateController
     {
-        public Task SetState<State>() where State : IUIState;
+        public void SetState<State>() where State : IUIState;
+        public void Stop();
     }
 }

@@ -2,20 +2,23 @@
 {
     public class MainMenuState : IUIState
     {
-        public Task ExecuteAsync(IUIStateController controller, CancellationToken stoppingToken)
+        public async Task Execute(IUIStateController controller, CancellationToken stoppingToken)
         {
             Console.WriteLine("--- Contact Manager ---");
             while (true)
             {
                 Console.WriteLine("Please enter a command. Possible Commands: 0 - Exit, 1 - Test");
-                var command = Console.ReadLine();
+                var command = await Console.In.ReadLineAsync();
+
                 if (command == "0")
                 {
-                    return Task.CompletedTask;
+                    controller.SetState<ExitState>();
+                    return;
                 }
                 else if (command == "1")
                 {
-                    return controller.SetState<TestState>();
+                    controller.SetState<TestState>();
+                    return;
                 }
                 else
                 {
