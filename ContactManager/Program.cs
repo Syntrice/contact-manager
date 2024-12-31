@@ -19,5 +19,4 @@ builder.Services.AddTransient<IUIState, ExitState>();
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
 IHost host = builder.Build();
-await host.StartAsync();
-await host.StopAsync();
+await host.RunAsync();

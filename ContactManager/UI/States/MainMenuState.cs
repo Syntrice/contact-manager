@@ -8,7 +8,8 @@
             while (true)
             {
                 Console.WriteLine("Please enter a command. Possible Commands: 0 - Exit, 1 - Test");
-                var command = await Console.In.ReadLineAsync();
+                var command = "0";
+                await Task.Delay(5000, stoppingToken);
 
                 if (command == "0")
                 {
