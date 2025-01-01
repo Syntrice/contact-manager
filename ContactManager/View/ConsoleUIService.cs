@@ -1,6 +1,8 @@
-﻿using ContactManager.View.States;
+﻿using ContactManager.Options;
+using ContactManager.View.States;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ContactManager.View
 {
@@ -9,13 +11,19 @@ namespace ContactManager.View
         private readonly IEnumerable<IUIState> _uiStates;
         private readonly IHostApplicationLifetime _appLifetime;
         private readonly ILogger _logger;
+        private readonly ConsoleUIOptions _options;
         private IUIState _currentState = null!;
 
-        public ConsoleUIService(IEnumerable<IUIState> uiStates, IHostApplicationLifetime appLifetime, ILogger<ConsoleUIService> logger)
+        public ConsoleUIService(
+            IEnumerable<IUIState> uiStates,
+            IHostApplicationLifetime appLifetime,
+            ILogger<ConsoleUIService> logger,
+            IOptions<ConsoleUIOptions> options)
         {
             _uiStates = uiStates;
             _appLifetime = appLifetime;
             _logger = logger;
+            _options = options.Value;
         }
 
         public void SetState(Type type)
@@ -35,7 +43,7 @@ namespace ContactManager.View
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation($"ExecuteAsync has been called");
-            SetState(typeof(MainMenuState));
+            SetState(_options.StartingUIState);
             while (!stoppingToken.IsCancellationRequested)
             {
                 await _currentState.Execute(this, stoppingToken);
