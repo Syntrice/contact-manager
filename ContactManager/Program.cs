@@ -1,4 +1,6 @@
 ﻿using ContactManager.Data.Model;
+using ContactManager.Data.Repository;
+using ContactManager.Logic;
 using ContactManager.Options;
 using ContactManager.View;
 using ContactManager.View.States;
@@ -12,6 +14,8 @@ builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(Dat
 builder.Services.Configure<ConsoleUIOptions>(options => options.StartingState = typeof(MainMenuState));
 builder.Services.AddDbContext<ContactsDbContext>();
 builder.Services.AddHostedService<DatabaseManagmentService>();
+builder.Services.AddScoped<IContactsRepository, ContactsRepository>();
+builder.Services.AddScoped<IContactsLogic, ContactsLogic>();
 builder.Services.AddHostedService<ConsoleUIService>();
 builder.Services.AddTransient<IState, MainMenuState>();
 builder.Services.AddTransient<IState, TestState>();

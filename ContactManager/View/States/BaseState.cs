@@ -10,6 +10,7 @@ namespace ContactManager.View.States
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(_title);
+            AnsiConsole.WriteLine();
             return Task.CompletedTask;
         }
     }
