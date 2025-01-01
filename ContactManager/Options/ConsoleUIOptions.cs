@@ -2,6 +2,7 @@
 
 namespace ContactManager.Options
 {
+    // TODO: Extract interface to mock this class in unit tests
     public class ConsoleUIOptions
     {
         private Type _startingState = null!;
