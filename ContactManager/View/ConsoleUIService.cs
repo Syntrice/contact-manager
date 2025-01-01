@@ -6,16 +6,16 @@ using Microsoft.Extensions.Options;
 
 namespace ContactManager.View
 {
-    public class ConsoleUIService : BackgroundService, IUIStateController
+    public class ConsoleUIService : BackgroundService, IStateController
     {
-        private readonly IEnumerable<IUIState> _uiStates;
+        private readonly IEnumerable<IState> _uiStates;
         private readonly IHostApplicationLifetime _appLifetime;
         private readonly ILogger _logger;
         private readonly ConsoleUIOptions _options;
-        private IUIState _currentState = null!;
+        public IState CurrentState {  get; private set; } = null!;
 
         public ConsoleUIService(
-            IEnumerable<IUIState> uiStates,
+            IEnumerable<IState> uiStates,
             IHostApplicationLifetime appLifetime,
             ILogger<ConsoleUIService> logger,
             IOptions<ConsoleUIOptions> options)
@@ -28,7 +28,7 @@ namespace ContactManager.View
 
         public void SetState(Type type)
         {
-            IUIState? instance = _uiStates.FirstOrDefault(x => x.GetType() == type);
+            IState? instance = _uiStates.FirstOrDefault(x => x.GetType() == type);
             if (instance == null)
             {
                 throw new InvalidOperationException($"No IUIState dependency of type {type.Name} found.");
@@ -36,17 +36,17 @@ namespace ContactManager.View
             else
             {
                 _logger.LogInformation($"Setting UI state to {type.Name}");
-                _currentState = instance;
+                CurrentState = instance;
             }
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation($"ExecuteAsync has been called");
-            SetState(_options.StartingUIState);
+            SetState(_options.StartingState);
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _currentState.Execute(this, stoppingToken);
+                await CurrentState.Execute(this, stoppingToken);
             }
         }
 

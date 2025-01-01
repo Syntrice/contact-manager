@@ -2,9 +2,9 @@
 
 namespace ContactManager.View.States
 {
-    public class MainMenuState : IUIState
+    public class MainMenuState : IState
     {
-        public async Task Execute(IUIStateController controller, CancellationToken stoppingToken)
+        public async Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
             Console.WriteLine("--- Contact Manager ---");
             while (true)

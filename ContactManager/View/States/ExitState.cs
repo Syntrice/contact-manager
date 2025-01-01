@@ -2,9 +2,9 @@
 
 namespace ContactManager.View.States
 {
-    public class ExitState : IUIState
+    public class ExitState : IState
     {
-        public Task Execute(IUIStateController controller, CancellationToken stoppingToken)
+        public Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
             Console.WriteLine("Exiting...");
             controller.Stop();

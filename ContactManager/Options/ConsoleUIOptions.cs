@@ -4,23 +4,23 @@ namespace ContactManager.Options
 {
     public class ConsoleUIOptions
     {
-        private Type _startingUIState = null!;
-        public Type StartingUIState
+        private Type _startingState = null!;
+        public Type StartingState
         {
             get
             {
-                return _startingUIState;
+                return _startingState;
             }
 
             set
             {
-                if (!typeof(IUIState).IsAssignableFrom(value))
+                if (!typeof(IState).IsAssignableFrom(value))
                 {
                     throw new ArgumentException("The starting UI state must implement IUIState");
                 }
                 else
                 {
-                    _startingUIState = value;
+                    _startingState = value;
                 }
             }
         }

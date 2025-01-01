@@ -2,9 +2,9 @@
 
 namespace ContactManager.View.States
 {
-    public class TestState : IUIState
+    public class TestState : IState
     {
-        public Task Execute(IUIStateController controller, CancellationToken stoppingToken)
+        public Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
             Console.WriteLine();
             Console.WriteLine("Testing menu");

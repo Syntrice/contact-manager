@@ -9,13 +9,13 @@ using Microsoft.Extensions.Logging;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName)); 
-builder.Services.Configure<ConsoleUIOptions>(options => options.StartingUIState = typeof(MainMenuState));
+builder.Services.Configure<ConsoleUIOptions>(options => options.StartingState = typeof(MainMenuState));
 builder.Services.AddDbContext<ContactsDbContext>();
 builder.Services.AddHostedService<DatabaseManagmentService>();
 builder.Services.AddHostedService<ConsoleUIService>();
-builder.Services.AddTransient<IUIState, MainMenuState>();
-builder.Services.AddTransient<IUIState, TestState>();
-builder.Services.AddTransient<IUIState, ExitState>();
+builder.Services.AddTransient<IState, MainMenuState>();
+builder.Services.AddTransient<IState, TestState>();
+builder.Services.AddTransient<IState, ExitState>();
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
 IHost host = builder.Build();
