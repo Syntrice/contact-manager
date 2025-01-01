@@ -1,12 +1,13 @@
-﻿using ContactManager.View;
+﻿using Spectre.Console;
 
 namespace ContactManager.View.States
 {
-    public class ExitState : IState
+    public class ExitState : BaseState, IState
     {
-        public Task Execute(IStateController controller, CancellationToken stoppingToken)
+        public override Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
-            Console.WriteLine("Exiting...");
+            base.Execute(controller, stoppingToken);
+            AnsiConsole.WriteLine("Exiting...");
             controller.Stop();
             stoppingToken.WaitHandle.WaitOne();
             return Task.CompletedTask;

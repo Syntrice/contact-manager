@@ -1,16 +1,15 @@
-﻿using ContactManager.View;
+﻿using Spectre.Console;
 
 namespace ContactManager.View.States
 {
-    public class TestState : IState
+    public class TestState : BaseState, IState
     {
-        public Task Execute(IStateController controller, CancellationToken stoppingToken)
+        public override async Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
-            Console.WriteLine();
-            Console.WriteLine("Testing menu");
-            Console.WriteLine();
+            await base.Execute(controller, stoppingToken);
+            AnsiConsole.WriteLine("Testing State");
+            await Task.Delay(2000);
             controller.SetState(typeof(MainMenuState));
-            return Task.CompletedTask;
         }
     }
 }

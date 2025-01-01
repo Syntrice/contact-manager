@@ -1,6 +1,4 @@
-﻿using ContactManager.View;
-
-namespace ContactManager.View.States
+﻿namespace ContactManager.View.States
 {
     public interface IState
     {

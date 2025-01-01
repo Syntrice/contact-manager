@@ -1,32 +1,31 @@
-﻿using ContactManager.View;
+﻿using Spectre.Console;
 
 namespace ContactManager.View.States
 {
-    public class MainMenuState : IState
+    public class MainMenuState : BaseState, IState
     {
-        public async Task Execute(IStateController controller, CancellationToken stoppingToken)
-        {
-            Console.WriteLine("--- Contact Manager ---");
-            while (true)
-            {
-                Console.WriteLine("Please enter a command. Possible Commands: 0 - Exit, 1 - Test");
-                var command = await Task.Run(() => Console.ReadLine());
+        private SelectionPrompt<string> _menuPrompt = new SelectionPrompt<string>()
+            .Title("Main Menu")
+            .AddChoices(new[] { "Exit", "Test" });
 
-                if (command == "0")
-                {
+        public override async Task Execute(IStateController controller, CancellationToken stoppingToken)
+        {
+            await base.Execute(controller, stoppingToken);
+            string choice = await Task.Run(() => AnsiConsole.Prompt<string>(_menuPrompt));
+
+            switch (choice)
+            {
+                case "Exit":
                     controller.SetState(typeof(ExitState));
-                    return;
-                }
-                else if (command == "1")
-                {
+                    break;
+                case "Test":
                     controller.SetState(typeof(TestState));
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid command. Please try again.");
-                }
+                    break;
+                default:
+                    throw new InvalidOperationException();
             }
         }
+
+        
     }
 }
