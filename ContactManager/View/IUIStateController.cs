@@ -1,6 +1,6 @@
-﻿using ContactManager.Services.UI.States;
+﻿using ContactManager.View.States;
 
-namespace ContactManager.Services.UI
+namespace ContactManager.View
 {
     public interface IUIStateController
     {

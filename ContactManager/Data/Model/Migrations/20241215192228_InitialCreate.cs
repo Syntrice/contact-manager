@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ContactManager.Migrations
+namespace ContactManager.Data.Model.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

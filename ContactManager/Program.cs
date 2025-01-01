@@ -1,8 +1,7 @@
-﻿using ContactManager.Model;
+﻿using ContactManager.Data.Model;
 using ContactManager.Options;
-using ContactManager.Services;
-using ContactManager.Services.UI;
-using ContactManager.Services.UI.States;
+using ContactManager.View;
+using ContactManager.View.States;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.Logging;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName)); 
-builder.Services.AddDbContext<IContactDatabaseContext, ContactDatabaseContext>();
+builder.Services.AddDbContext<ContactsDbContext>();
 builder.Services.AddHostedService<DatabaseManagmentService>();
 builder.Services.AddHostedService<ConsoleUIService>();
 builder.Services.AddTransient<IUIState, MainMenuState>();

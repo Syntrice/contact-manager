@@ -1,6 +1,6 @@
-﻿using ContactManager.Services.UI;
+﻿using ContactManager.View;
 
-namespace ContactManager.Services.UI.States
+namespace ContactManager.View.States
 {
     public class TestState : IUIState
     {

@@ -2,19 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace ContactManager.Model
+namespace ContactManager.Data.Model
 {
-    public interface IContactDatabaseContext
-    {
-        DbSet<Contact> Contacts { get; set; }
-        DbSet<EmailAddressCategory> EmailAddressCategories { get; set; }
-        DbSet<EmailAddress> Emails { get; set; }
-        DbSet<PhoneNumberCategory> PhoneNumberCategories { get; set; }
-        DbSet<PhoneNumber> PhoneNumbers { get; set; }
-        public Task Migrate();
-    }
-
-    public class ContactDatabaseContext : DbContext, IContactDatabaseContext
+    public class ContactsDbContext : DbContext
     {
         private DatabaseOptions _options;
 
@@ -28,7 +18,7 @@ namespace ContactManager.Model
 
         public DbSet<EmailAddressCategory> EmailAddressCategories { get; set; } = null!;
 
-        public ContactDatabaseContext(IOptions<DatabaseOptions> databaseOptions)
+        public ContactsDbContext(IOptions<DatabaseOptions> databaseOptions)
         {
             _options = databaseOptions.Value;
         }

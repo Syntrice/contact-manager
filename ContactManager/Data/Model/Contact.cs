@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ContactManager.Model
+namespace ContactManager.Data.Model
 {
     public class Contact
     {

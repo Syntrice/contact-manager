@@ -1,16 +1,14 @@
-﻿using ContactManager.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ContactManager.Services
+namespace ContactManager.Data.Model
 {
     public class DatabaseManagmentService : IHostedService
     {
-        private readonly IContactDatabaseContext _dbContext;
+        private readonly ContactsDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public DatabaseManagmentService(IContactDatabaseContext context, ILogger<DatabaseManagmentService> logger)
+        public DatabaseManagmentService(ContactsDbContext context, ILogger<DatabaseManagmentService> logger)
         {
             _dbContext = context;
             _logger = logger;
