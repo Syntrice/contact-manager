@@ -14,12 +14,12 @@ namespace ContactManager.View.States
 
                 if (command == "0")
                 {
-                    controller.SetState<ExitState>();
+                    controller.SetState(typeof(ExitState));
                     return;
                 }
                 else if (command == "1")
                 {
-                    controller.SetState<TestState>();
+                    controller.SetState(typeof(TestState));
                     return;
                 }
                 else

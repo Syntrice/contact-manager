@@ -9,7 +9,7 @@ namespace ContactManager.View.States
             Console.WriteLine();
             Console.WriteLine("Testing menu");
             Console.WriteLine();
-            controller.SetState<MainMenuState>();
+            controller.SetState(typeof(MainMenuState));
             return Task.CompletedTask;
         }
     }

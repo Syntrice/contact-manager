@@ -18,16 +18,16 @@ namespace ContactManager.View
             _logger = logger;
         }
 
-        public void SetState<State>() where State : IUIState
+        public void SetState(Type type)
         {
-            _logger.LogInformation($"Setting UI state to {typeof(State).Name}");
-            IUIState? instance = _uiStates.OfType<State>().FirstOrDefault();
+            IUIState? instance = _uiStates.FirstOrDefault(x => x.GetType() == type);
             if (instance == null)
             {
-                throw new InvalidOperationException($"No IUIState dependency of type {typeof(State).Name} found.");
+                throw new InvalidOperationException($"No IUIState dependency of type {type.Name} found.");
             }
             else
             {
+                _logger.LogInformation($"Setting UI state to {type.Name}");
                 _currentState = instance;
             }
         }
@@ -35,7 +35,7 @@ namespace ContactManager.View
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation($"ExecuteAsync has been called");
-            SetState<MainMenuState>();
+            SetState(typeof(MainMenuState));
             while (!stoppingToken.IsCancellationRequested)
             {
                 await _currentState.Execute(this, stoppingToken);
