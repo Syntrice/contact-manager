@@ -6,7 +6,7 @@ namespace ContactManager.View.States
     {
         private SelectionPrompt<string> _menuPrompt = new SelectionPrompt<string>()
             .Title("Main Menu")
-            .AddChoices(new[] { "Exit", "Test" });
+            .AddChoices(new[] { "Exit" });
 
         public override async Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
@@ -17,9 +17,6 @@ namespace ContactManager.View.States
             {
                 case "Exit":
                     controller.SetState(typeof(ExitState));
-                    break;
-                case "Test":
-                    controller.SetState(typeof(TestState));
                     break;
                 default:
                     throw new InvalidOperationException();

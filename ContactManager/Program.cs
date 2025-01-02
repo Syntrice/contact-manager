@@ -18,7 +18,6 @@ builder.Services.AddScoped<IContactsRepository, ContactsRepository>();
 builder.Services.AddScoped<IContactsLogic, ContactsLogic>();
 builder.Services.AddHostedService<ConsoleUIService>();
 builder.Services.AddTransient<IState, MainMenuState>();
-builder.Services.AddTransient<IState, TestState>();
 builder.Services.AddTransient<IState, ExitState>();
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
