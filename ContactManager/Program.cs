@@ -1,7 +1,7 @@
 ﻿using ContactManager.Data.Model;
 using ContactManager.Data.Repository;
 using ContactManager.Logic;
-using ContactManager.Options;
+using ContactManager.ApplicationOptions;
 using ContactManager.View;
 using ContactManager.View.States;
 using Microsoft.Extensions.DependencyInjection;

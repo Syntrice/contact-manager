@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Options
+﻿namespace ContactManager.ApplicationOptions
 {
     public sealed class DatabaseOptions
     {

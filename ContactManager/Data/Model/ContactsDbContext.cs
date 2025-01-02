@@ -1,4 +1,4 @@
-﻿using ContactManager.Options;
+﻿using ContactManager.ApplicationOptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 

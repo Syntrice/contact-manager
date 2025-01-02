@@ -1,4 +1,4 @@
-﻿using ContactManager.Options;
+﻿using ContactManager.ApplicationOptions;
 using FluentAssertions;
 
 namespace ContactManager.Tests.Options

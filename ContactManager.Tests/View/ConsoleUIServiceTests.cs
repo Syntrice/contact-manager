@@ -1,4 +1,4 @@
-﻿using ContactManager.Options;
+﻿using ContactManager.ApplicationOptions;
 using ContactManager.View;
 using ContactManager.View.States;
 using FluentAssertions;

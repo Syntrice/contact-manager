@@ -1,6 +1,6 @@
 ﻿using ContactManager.View.States;
 
-namespace ContactManager.Options
+namespace ContactManager.ApplicationOptions
 {
     // TODO: Extract interface to mock this class in unit tests
     public class ConsoleUIOptions
