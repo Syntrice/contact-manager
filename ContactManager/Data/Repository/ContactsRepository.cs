@@ -5,56 +5,59 @@ namespace ContactManager.Data.Repository
 {
     public class ContactsRepository : IContactsRepository
     {
-        private readonly ContactsDbContext _context;
+        private readonly ContactsDbContext _db;
         public ContactsRepository(ContactsDbContext context)
         {
-            _context = context;
+            _db = context;
         }
 
-        public async Task AddContactAsync(Contact contact)
+        public Contact? AddContact(Contact contact)
         {
-            _context.Contacts.Add(contact);
-            await _context.SaveChangesAsync();
+            _db.Contacts.Add(contact);
+            return contact;
         }
 
-        public async Task<Contact?> GetContactByIdAsync(int id)
+        public async Task<Contact?> DeleteContactAsync(int contactId)
         {
-            return await _context.Contacts.AsNoTracking().SingleAsync(c => c.ContactId == id);
-        }
+            Contact? contact = await _db.Contacts.FindAsync(contactId);
 
-        public async Task<List<Contact>> GetAllContextsAsync()
-        {
-            return await _context.Contacts.ToListAsync();
-        }
-
-        public async Task UpdateContactByIdAsync(int id, Contact updatedContact)
-        {
-            Contact? contactToUpdate = await _context.Contacts.FindAsync(id);
-
-            // TODO: Handle null contactToUpdate
-            if (contactToUpdate == null)
+            if (contact != null)
             {
-                return;
+                _db.Contacts.Remove(contact);
             }
 
-            contactToUpdate.Name = updatedContact.Name;
-            contactToUpdate.PhoneNumbers = updatedContact.PhoneNumbers;
-            contactToUpdate.EmailAddresses = updatedContact.EmailAddresses;
-            await _context.SaveChangesAsync();
+            return contact;
         }
 
-        public async Task DeleteContactByIdAsync(int id)
+        public async Task<IEnumerable<Contact>> GetAllContactsAsync()
         {
-            Contact? contact = await _context.Contacts.FindAsync(id);
+            List<Contact> contacts = await _db.Contacts.AsNoTracking().ToListAsync();
+            return contacts;
+        }
 
-            // TODO: Handle null contactToUpdate
-            if (contact == null)
+        public async Task<Contact?> GetContactByIdAsync(int contactId)
+        {
+            Contact? contact = await _db.Contacts.AsNoTracking().SingleOrDefaultAsync(c => c.ContactId == contactId);
+            return contact;
+        }
+
+        public async Task SaveAsync()
+        {
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<Contact?> UpdateContactAsync(Contact contact)
+        {
+            Contact? contactToUpdate = await _db.Contacts.FindAsync(contact.ContactId);
+
+            if (contactToUpdate != null)
             {
-                return;
+                    contactToUpdate.Name = contact.Name;
+                    contactToUpdate.EmailAddresses = contact.EmailAddresses;
+                    contactToUpdate.PhoneNumbers = contact.PhoneNumbers;
             }
 
-            _context.Contacts.Remove(contact);  
-            await _context.SaveChangesAsync();
+            return contactToUpdate;
         }
     }
 }
