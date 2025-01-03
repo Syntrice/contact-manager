@@ -16,10 +16,15 @@ namespace ContactManager.Data.Repository
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
         }
-        
+
         public async Task<Contact?> GetContactByIdAsync(int id)
         {
             return await _context.Contacts.AsNoTracking().SingleAsync(c => c.ContactId == id);
+        }
+
+        public async Task<List<Contact>> GetAllContextsAsync()
+        {
+            return await _context.Contacts.ToListAsync();
         }
 
         public async Task UpdateContactByIdAsync(int id, Contact updatedContact)
