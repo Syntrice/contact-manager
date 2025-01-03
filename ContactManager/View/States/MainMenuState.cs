@@ -2,27 +2,28 @@
 
 namespace ContactManager.View.States
 {
+    using ChoiceAction = (Action<IStateController> Action, string Name);
     public class MainMenuState : BaseState, IState
     {
-        private SelectionPrompt<string> _menuPrompt = new SelectionPrompt<string>()
+
+        private static List<ChoiceAction> _choices = new List<ChoiceAction>
+        {
+            ( (controller) => controller.SetState(typeof(ExitState)), "Exit" ),
+            ( (controller) => controller.SetState(typeof(ContactsBrowseState)), "Browse Contacts" )
+        };
+
+
+        private static SelectionPrompt<ChoiceAction> _menu = new SelectionPrompt<ChoiceAction>()
             .Title("Main Menu")
-            .AddChoices(new[] { "Exit" });
+            .AddChoices(_choices)
+            .UseConverter(choice => choice.Name);
+
 
         public override async Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
             await base.Execute(controller, stoppingToken);
-            string choice = await Task.Run(() => AnsiConsole.Prompt<string>(_menuPrompt));
-
-            switch (choice)
-            {
-                case "Exit":
-                    controller.SetState(typeof(ExitState));
-                    break;
-                default:
-                    throw new InvalidOperationException();
-            }
+            var choice = await Task.Run(() => AnsiConsole.Prompt<ChoiceAction>(_menu));
+            choice.Action.Invoke(controller);
         }
-
-        
     }
 }
