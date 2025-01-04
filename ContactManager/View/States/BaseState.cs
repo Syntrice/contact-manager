@@ -8,10 +8,15 @@ namespace ContactManager.View.States
 
         public virtual Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
+            Clear();
+            return Task.CompletedTask;
+        }
+
+        protected void Clear()
+        {
             AnsiConsole.Clear();
             AnsiConsole.Write(_title);
             AnsiConsole.WriteLine();
-            return Task.CompletedTask;
         }
     }
 }

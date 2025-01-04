@@ -21,7 +21,7 @@ namespace ContactManager.View.States
 
         public override async Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
-            await base.Execute(controller, stoppingToken);
+            Clear();
             var choice = await Task.Run(() => AnsiConsole.Prompt<ChoiceAction>(_menu));
             choice.Action.Invoke(controller);
         }

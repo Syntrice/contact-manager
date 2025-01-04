@@ -6,7 +6,7 @@ namespace ContactManager.View.States
     {
         public override Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
-            base.Execute(controller, stoppingToken);
+            Clear();
             AnsiConsole.WriteLine("Exiting...");
             controller.Stop();
             stoppingToken.WaitHandle.WaitOne();

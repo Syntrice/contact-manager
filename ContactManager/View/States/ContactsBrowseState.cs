@@ -14,7 +14,7 @@ namespace ContactManager.View.States
 
         public override Task Execute(IStateController controller, CancellationToken stoppingToken)
         {
-            base.Execute(controller, stoppingToken);
+            Clear();
             return Task.CompletedTask;
         }
     }
