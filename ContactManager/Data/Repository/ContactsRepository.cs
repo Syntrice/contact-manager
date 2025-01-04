@@ -17,47 +17,130 @@ namespace ContactManager.Data.Repository
             return contact;
         }
 
-        public async Task<Contact?> DeleteContactAsync(int contactId)
+        public EmailAddress? AddEmailAddress(EmailAddress address)
         {
-            Contact? contact = await _db.Contacts.FindAsync(contactId);
+            throw new NotImplementedException();
+        }
 
-            if (contact != null)
-            {
-                _db.Contacts.Remove(contact);
-            }
+        public EmailAddressCategory? AddEmailAddressCategory(EmailAddressCategory category)
+        {
+            throw new NotImplementedException();
+        }
 
-            return contact;
+        public PhoneNumber? AddPhoneNumber(PhoneNumber phoneNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PhoneNumberCategory? AddPhoneNumberCategory(PhoneNumberCategory category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Contact?> DeleteContactByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmailAddress?> DeleteEmailAddressByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmailAddressCategory?> DeleteEmailAddressCategoryByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PhoneNumber?> DeletePhoneNumberByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PhoneNumberCategory?> DeletePhoneNumberCategoryByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Contact>> GetAllContactsAsync()
         {
-            List<Contact> contacts = await _db.Contacts.AsNoTracking().ToListAsync();
+            var contacts = await _db.Contacts.AsNoTracking().ToListAsync();
             return contacts;
         }
 
-        public async Task<Contact?> GetContactByIdAsync(int contactId)
+        public Task<IEnumerable<EmailAddressCategory>> GetAllEmailAddressCategoriesAsync()
         {
-            Contact? contact = await _db.Contacts.AsNoTracking().SingleOrDefaultAsync(c => c.ContactId == contactId);
-            return contact;
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<EmailAddress>> GetAllEmailAddressesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<PhoneNumberCategory>> GetAllPhoneNumberCategoriesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<PhoneNumber>> GetAllPhoneNumbersAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Contact?> GetContactByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmailAddress?> GetEmailAddressByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmailAddressCategory?> GetEmailAddressCategoryByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PhoneNumber?> GetPhoneNumberByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PhoneNumberCategory?> GetPhoneNumberCategoryByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Contact?> UpdateContactAsync(Contact contact)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmailAddress?> UpdateEmailAddressAsync(EmailAddress emailAddress)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmailAddressCategory?> UpdateEmailAddressCategoryAsync(EmailAddressCategory category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PhoneNumber?> UpdatePhoneNumberAsync(PhoneNumber phoneNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PhoneNumberCategory?> UpdatePhoneNumberCategoryAsync(PhoneNumberCategory category)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task SaveAsync()
         {
             await _db.SaveChangesAsync();
-        }
-
-        public async Task<Contact?> UpdateContactAsync(Contact contact)
-        {
-            Contact? contactToUpdate = await _db.Contacts.FindAsync(contact.ContactId);
-
-            if (contactToUpdate != null)
-            {
-                    contactToUpdate.Name = contact.Name;
-                    contactToUpdate.EmailAddresses = contact.EmailAddresses;
-                    contactToUpdate.PhoneNumbers = contact.PhoneNumbers;
-            }
-
-            return contactToUpdate;
         }
     }
 }
