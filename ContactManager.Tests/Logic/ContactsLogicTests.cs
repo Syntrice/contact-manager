@@ -13,7 +13,7 @@ namespace ContactManager.Tests.Logic
         [TestCase("John Smith")]
         [TestCase("John Smith Foo")]
         [TestCase("John Smith Foo Bar")]
-        public async Task CreateContactAsync_WithValidNames_ReturnsSuccessResponse(string name)
+        public async Task CreateContactAsync_WithValidNames_ReturnsSuccess(string name)
         {
             // Arrange
             var repo = GetRepositoryMock();
@@ -47,7 +47,7 @@ namespace ContactManager.Tests.Logic
         }
 
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
-        public async Task CreateContactAsync_WithTooLongName_ReturnsFailiureResponse(string name)
+        public async Task CreateContactAsync_WithTooLongName_ReturnsFailiure(string name)
         {
             // Arrange
             var repo = GetRepositoryMock();
@@ -78,7 +78,7 @@ namespace ContactManager.Tests.Logic
         }
 
         [TestCase("")]
-        public async Task CreateContactAsync_WithEmptyString_ReturnsFailiureResponse(string name)
+        public async Task CreateContactAsync_WithEmptyString_ReturnsFailiure(string name)
         {
             // Arrange
             var repo = GetRepositoryMock();
@@ -105,6 +105,44 @@ namespace ContactManager.Tests.Logic
             // Assert
             repo.Verify(x => x.AddContact(It.IsAny<Contact>()), Times.Never);
             repo.Verify(x => x.SaveAsync(), Times.Never);
+        }
+
+        [Test]
+        public async Task GetContactsAsync_WithNonEmptyRepository_ReturnsSuccessWithValuesFromRepo()
+        {
+            // Arrange
+            var repo = GetRepositoryMock();
+            var contacts = new List<Contact>()
+            {
+                new Contact() {Name = "foo", ContactId = 0},
+                new Contact() {Name = "bar", ContactId = 1},
+            };
+            repo.Setup(obj => obj.GetAllContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
+            var logic = new ContactsLogic(repo.Object);
+
+            // Act
+            var response = await logic.GetContactsAsync();
+
+            // Assert
+            response.Value.Should().BeEquivalentTo(contacts);
+            response.Type.Should().Be(ResponseType.Success);
+            repo.Verify(obj => obj.GetAllContactsAsync(), Times.Once);
+        }
+
+        [Test]
+        public async Task GetContactsAsync_WithEmptyRepository_ReturnsFailiure()
+        {
+            // Arrange
+            var repo = GetRepositoryMock();
+            var contacts = new List<Contact>();
+            repo.Setup(obj => obj.GetAllContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
+            var logic = new ContactsLogic(repo.Object);
+
+            // Act
+            var response = await logic.GetContactsAsync();
+
+            // Assert
+            response.Type.Should().Be(ResponseType.Failiure);
         }
 
         private Mock<IContactsRepository> GetRepositoryMock()

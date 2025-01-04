@@ -1,6 +1,7 @@
 ﻿using ContactManager.Data.Model;
 using ContactManager.Data.Repository;
 using ContactManager.Data.Validation;
+using FluentValidation.Results;
 
 namespace ContactManager.Logic
 {
@@ -18,7 +19,7 @@ namespace ContactManager.Logic
         public async Task<Response> CreateContactAsync(string name)
         {
             Contact contact = new Contact() { Name = name };
-            var validation = _contactValidator.Validate(contact);
+            ValidationResult validation = _contactValidator.Validate(contact);
 
             if (!validation.IsValid)
             {
@@ -30,9 +31,14 @@ namespace ContactManager.Logic
             return Response.Success();
         }
 
-        public Task<Response<List<Contact>>> GetContactsAsync()
+        public async Task<Response<List<Contact>>> GetContactsAsync()
         {
-            throw new NotImplementedException();
+            List<Contact> contacts = (await _repo.GetAllContactsAsync()).ToList();
+            if (contacts.Count == 0)
+            {
+                return Response<List<Contact>>.Failiure("No contacts in repository.", contacts);
+            }
+            return Response<List<Contact>>.Success(contacts);
         }
     }
 }
