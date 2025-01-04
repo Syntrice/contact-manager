@@ -24,7 +24,7 @@ namespace ContactManager.Tests.Logic
             var response = await logic.CreateContactAsync(name);
 
             // Assert
-            response.ResponseType.Should().Be(expected);
+            response.Type.Should().Be(expected);
 
         }
 
@@ -59,7 +59,7 @@ namespace ContactManager.Tests.Logic
             var response = await logic.CreateContactAsync(name);
 
             // Assert
-            response.ResponseType.Should().Be(expected);
+            response.Type.Should().Be(expected);
         }
 
         [TestCase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
@@ -89,7 +89,7 @@ namespace ContactManager.Tests.Logic
             var response = await logic.CreateContactAsync(name);
 
             // Assert
-            response.ResponseType.Should().Be(expected);
+            response.Type.Should().Be(expected);
         }
 
         [TestCase("")]

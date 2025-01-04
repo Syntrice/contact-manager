@@ -9,15 +9,14 @@ namespace ContactManager.View.States
         private static List<ChoiceAction> _choices = new List<ChoiceAction>
         {
             ( (controller) => controller.SetState(typeof(ExitState)), "Exit" ),
-            ( (controller) => controller.SetState(typeof(ContactsBrowseState)), "Browse Contacts" )
+            ( (controller) => controller.SetState(typeof(AddContactState)), "Add Contact" ),
+            ( (controller) => controller.SetState(typeof(BrowseContactsState)), "List Contacts" )
         };
-
 
         private static SelectionPrompt<ChoiceAction> _menu = new SelectionPrompt<ChoiceAction>()
             .Title("Main Menu")
             .AddChoices(_choices)
             .UseConverter(choice => choice.Name);
-
 
         public override async Task Execute(IStateController controller, CancellationToken stoppingToken)
         {

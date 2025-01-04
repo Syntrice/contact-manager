@@ -19,6 +19,8 @@ builder.Services.AddScoped<IContactsLogic, ContactsLogic>();
 builder.Services.AddHostedService<ConsoleUIService>();
 builder.Services.AddTransient<IState, MainMenuState>();
 builder.Services.AddTransient<IState, ExitState>();
+builder.Services.AddTransient<IState, AddContactState>();
+builder.Services.AddTransient<IState, BrowseContactsState>();
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
 IHost host = builder.Build();

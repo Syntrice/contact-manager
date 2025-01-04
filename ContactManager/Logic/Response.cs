@@ -26,11 +26,11 @@
     public class Response
     {
         public string? Message { get; }
-        public ResponseType ResponseType { get; }
+        public ResponseType Type { get; }
 
         public Response(ResponseType type, string? message)
         {
-            ResponseType = type; 
+            Type = type; 
             Message = message;
         }
 
