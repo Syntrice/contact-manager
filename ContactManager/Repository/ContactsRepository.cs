@@ -17,9 +17,17 @@ namespace ContactManager.Repository
             return contact;
         }
 
-        public Task<Contact?> DeleteContactByIdAsync(int id)
+        public async Task<Contact?> DeleteContactByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            // Check if contact exists
+            Contact? contact = await _db.Contacts.FindAsync(id);
+
+            if (contact != null)
+            {
+                _db.Contacts.Remove(contact);
+            }
+
+            return contact;
         }
 
         public async Task<IEnumerable<Contact>> GetContactsAsync()
@@ -28,9 +36,9 @@ namespace ContactManager.Repository
             return contacts;
         }
 
-        public Task<Contact?> GetContactByIdAsync(int id)
+        public async Task<Contact?> GetContactByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Contacts.FindAsync(id);
         }
 
         public async Task SaveAsync()
@@ -38,9 +46,16 @@ namespace ContactManager.Repository
             await _db.SaveChangesAsync();
         }
 
-        public Task<Contact?> UpdateContactAsync(Contact contact)
+        public async Task<Contact?> UpdateContactAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            Contact? existingContact = await _db.Contacts.FindAsync(contact.ContactId);
+
+            if (existingContact != null)
+            {
+                _db.Entry(existingContact).CurrentValues.SetValues(contact);
+            }
+
+            return existingContact;
         }
     }
 }
