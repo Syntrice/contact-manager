@@ -33,7 +33,7 @@ namespace ContactManager.Logic
 
         public async Task<Response<List<Contact>>> GetContactsAsync()
         {
-            List<Contact> contacts = (await _repo.GetAllContactsAsync()).ToList();
+            List<Contact> contacts = (await _repo.GetContactsAsync()).ToList();
             if (contacts.Count == 0)
             {
                 return Response<List<Contact>>.Failiure("No contacts in repository.", contacts);

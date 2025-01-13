@@ -117,7 +117,7 @@ namespace ContactManager.Tests.Logic
                 new Contact() {Name = "foo", ContactId = 0},
                 new Contact() {Name = "bar", ContactId = 1},
             };
-            repo.Setup(obj => obj.GetAllContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
+            repo.Setup(obj => obj.GetContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
             var logic = new ContactsController(repo.Object);
 
             // Act
@@ -126,7 +126,7 @@ namespace ContactManager.Tests.Logic
             // Assert
             response.Value.Should().BeEquivalentTo(contacts);
             response.Type.Should().Be(ResponseType.Success);
-            repo.Verify(obj => obj.GetAllContactsAsync(), Times.Once);
+            repo.Verify(obj => obj.GetContactsAsync(), Times.Once);
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace ContactManager.Tests.Logic
             // Arrange
             var repo = GetRepositoryMock();
             var contacts = new List<Contact>();
-            repo.Setup(obj => obj.GetAllContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
+            repo.Setup(obj => obj.GetContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
             var logic = new ContactsController(repo.Object);
 
             // Act
