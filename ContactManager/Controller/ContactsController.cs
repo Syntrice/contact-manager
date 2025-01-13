@@ -1,16 +1,16 @@
-﻿using ContactManager.Data.Model;
-using ContactManager.Data.Repository;
-using ContactManager.Data.Validation;
+﻿using ContactManager.Model;
+using ContactManager.Model.Validation;
+using ContactManager.Repository;
 using FluentValidation.Results;
 
 namespace ContactManager.Logic
 {
-    public class ContactsLogic : IContactsLogic
+    public class ContactsController : IContactsController
     {
         private readonly IContactsRepository _repo;
         private readonly ContactValidator _contactValidator;
 
-        public ContactsLogic(IContactsRepository contactsRepository)
+        public ContactsController(IContactsRepository contactsRepository)
         {
             _repo = contactsRepository;
             _contactValidator = new ContactValidator();

@@ -1,7 +1,7 @@
-﻿using ContactManager.Data.Model;
+﻿using ContactManager.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContactManager.Data.Repository
+namespace ContactManager.Repository
 {
     public class ContactsRepository : IContactsRepository
     {

@@ -7,9 +7,9 @@ namespace ContactManager.View.States
 {
     public class AddContactState : BaseState, IState
     {
-        private readonly IContactsLogic _logic;
+        private readonly IContactsController _logic;
 
-        public AddContactState(IContactsLogic logic)
+        public AddContactState(IContactsController logic)
         {
             _logic = logic;
         }

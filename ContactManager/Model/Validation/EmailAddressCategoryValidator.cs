@@ -1,7 +1,7 @@
-﻿using ContactManager.Data.Model;
+﻿using ContactManager.Model;
 using FluentValidation;
 
-namespace ContactManager.Data.Validation
+namespace ContactManager.Model.Validation
 {
     public class EmailAddressCategoryValidator : AbstractValidator<EmailAddressCategory>
     {

@@ -5,8 +5,8 @@ namespace ContactManager.View.States
 {
     public class BrowseContactsState : BaseState, IState
     {
-        private readonly IContactsLogic _logic;
-        public BrowseContactsState(IContactsLogic contactsLogic)
+        private readonly IContactsController _logic;
+        public BrowseContactsState(IContactsController contactsLogic)
         {
             _logic = contactsLogic;
         }

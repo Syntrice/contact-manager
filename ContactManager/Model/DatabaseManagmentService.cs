@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ContactManager.Data.Model
+namespace ContactManager.Model
 {
     public class DatabaseManagmentService : IHostedService
     {

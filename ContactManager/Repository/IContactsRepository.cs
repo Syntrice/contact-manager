@@ -1,6 +1,6 @@
-﻿using ContactManager.Data.Model;
+﻿using ContactManager.Model;
 
-namespace ContactManager.Data.Repository
+namespace ContactManager.Repository
 {
     public interface IContactsRepository
     {

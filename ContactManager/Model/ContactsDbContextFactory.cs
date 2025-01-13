@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Options;
 
-namespace ContactManager.Data.Model
+namespace ContactManager.Model
 {
     public class ContactsDbContextFactory : IDesignTimeDbContextFactory<ContactsDbContext>
     {
