@@ -1,8 +1,17 @@
 # ContactManager
+![Animation](https://github.com/user-attachments/assets/333e2d9e-f159-435f-a62c-5497325c7799)
 
-A contact manager console application for managing contact details, 
-including phone numbers and emails
+## About
 
-## Database Structure
+## Features
+
+## Technologies
+
+## Database Schema
 
 ![alt text](Resources/entity_relationship_diagram.drawio.svg)
+
+## Setup
+
+## Licence
+
