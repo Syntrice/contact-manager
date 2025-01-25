@@ -8,9 +8,8 @@ namespace ContactManager.View.States
 
         private static List<ChoiceAction> _choices = new List<ChoiceAction>
         {
-            ( (controller) => controller.SetState(typeof(ExitState)), "Exit" ),
-            ( (controller) => controller.SetState(typeof(AddContactState)), "Add Contact" ),
-            ( (controller) => controller.SetState(typeof(BrowseContactsState)), "List Contacts" )
+            ( (controller) => controller.SetState(typeof(ManageContactsState)), "Manage Contacts" ),
+            ( (controller) => controller.SetState(typeof(ExitState)), "Exit" )
         };
 
         private static SelectionPrompt<ChoiceAction> _menu = new SelectionPrompt<ChoiceAction>()

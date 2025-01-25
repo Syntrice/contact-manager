@@ -13,6 +13,5 @@ namespace ContactManager.Model
         // Navigation Properties
         public ICollection<PhoneNumber> PhoneNumbers { get; set; } = new List<PhoneNumber>();
         public ICollection<EmailAddress> EmailAddresses { get; set; } = new List<EmailAddress>();
-
     }
 }
