@@ -1,8 +1,13 @@
 ﻿using ContactManager.ApplicationOptions;
+using ContactManager.Models.ContactModel;
+using ContactManager.Models.EmailAddressCategoryModel;
+using ContactManager.Models.EmailAddressModel;
+using ContactManager.Models.PhoneNumberCategoryModel;
+using ContactManager.Models.PhoneNumberModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace ContactManager.Model
+namespace ContactManager.Database
 {
     public class ContactsDbContext : DbContext
     {

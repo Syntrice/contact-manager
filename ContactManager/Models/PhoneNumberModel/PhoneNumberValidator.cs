@@ -1,7 +1,7 @@
-﻿using ContactManager.Model;
+﻿using ContactManager.Models;
 using FluentValidation;
 
-namespace ContactManager.Model.Validation
+namespace ContactManager.Models.PhoneNumberModel
 {
     public class PhoneNumberValidator : AbstractValidator<PhoneNumber>
     {

@@ -1,5 +1,7 @@
-﻿using ContactManager.Logic;
-using ContactManager.Model;
+﻿using ContactManager.Models;
+using ContactManager.Models.ContactModel;
+using ContactManager.Services;
+using ContactManager.Wrappers;
 using Spectre.Console;
 
 namespace ContactManager.View.States
@@ -8,17 +10,17 @@ namespace ContactManager.View.States
 
     public class ManageContactsState : BaseState, IState
     {
-        private readonly IContactsController _contactsController;
-        public ManageContactsState(IContactsController contactsController)
+        private readonly IContactService _contactService;
+        public ManageContactsState(IContactService contactService)
         {
-            _contactsController = contactsController;
+            _contactService = contactService;
         }
 
         public override async Task Execute(IStateController stateController, CancellationToken stoppingToken)
         {
             Clear();
 
-            var response = await _contactsController.GetContactsAsync();
+            var response = await _contactService.GetContactsAsync();
 
             List<ChoiceAction> _choices = new List<ChoiceAction>
             {
@@ -26,7 +28,7 @@ namespace ContactManager.View.States
                 ( async (controller) => await AddContact(controller), "Add New Contact" )
             };
 
-            if (response.Type == ResponseType.Success)
+            if (response.Type == ServiceResponseType.Success)
             {
                 List<ChoiceAction> contactChoices = response.Value.Select<Contact, ChoiceAction>(contact =>
                 {
@@ -73,14 +75,14 @@ namespace ContactManager.View.States
                 return AnsiConsole.Prompt<string>(new TextPrompt<string>("Enter Contact Name:"));
             });
 
-            var request = await _contactsController.CreateContactAsync(name);
+            var request = await _contactService.CreateContactAsync(name);
 
             switch (request.Type)
             {
-                case ResponseType.Success:
+                case ServiceResponseType.Success:
                     Console.WriteLine($"Successfuly added contact '{name}'");
                     break;
-                case ResponseType.Failiure:
+                case ServiceResponseType.Failure:
                     AnsiConsole.MarkupLine($"[red]{request.Message}[/]");
                     break;
             }

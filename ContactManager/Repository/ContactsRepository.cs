@@ -1,4 +1,6 @@
-﻿using ContactManager.Model;
+﻿using ContactManager.Database;
+using ContactManager.Models;
+using ContactManager.Models.ContactModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Repository

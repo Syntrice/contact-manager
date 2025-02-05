@@ -1,5 +1,5 @@
-﻿
-using ContactManager.Logic;
+﻿using ContactManager.Services;
+using ContactManager.Wrappers;
 using Spectre.Console;
 using SQLitePCL;
 
@@ -7,9 +7,9 @@ namespace ContactManager.View.States
 {
     public class AddContactState : BaseState, IState
     {
-        private readonly IContactsController _logic;
+        private readonly IContactService _logic;
 
-        public AddContactState(IContactsController logic)
+        public AddContactState(IContactService logic)
         {
             _logic = logic;
         }
@@ -27,10 +27,10 @@ namespace ContactManager.View.States
 
             switch (request.Type)
             {
-                case ResponseType.Success:
+                case ServiceResponseType.Success:
                     Console.WriteLine($"Successfuly added contact '{name}'");
                     break;
-                case ResponseType.Failiure:
+                case ServiceResponseType.Failure:
                     AnsiConsole.MarkupLine($"[red]{request.Message}[/]");
                     break;
             }

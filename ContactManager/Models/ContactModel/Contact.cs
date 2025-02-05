@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ContactManager.Models.EmailAddressModel;
+using ContactManager.Models.PhoneNumberModel;
 
-namespace ContactManager.Model
+namespace ContactManager.Models.ContactModel
 {
     public class Contact
     {

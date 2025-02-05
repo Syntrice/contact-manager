@@ -1,6 +1,7 @@
-﻿using ContactManager.Logic;
-using ContactManager.Model;
+﻿using ContactManager.Services;
+using ContactManager.Models.ContactModel;
 using ContactManager.Repository;
+using ContactManager.Wrappers;
 using FluentAssertions;
 using Moq;
 
@@ -17,8 +18,8 @@ namespace ContactManager.Tests.Logic
         {
             // Arrange
             var repo = GetRepositoryMock();
-            var logic = new ContactsController(repo.Object);
-            var expected = ResponseType.Success;
+            var logic = new ContactService(repo.Object);
+            var expected = ServiceResponseType.Success;
 
             // Act
             var response = await logic.CreateContactAsync(name);
@@ -36,7 +37,7 @@ namespace ContactManager.Tests.Logic
         {
             // Arrange
             var repo = GetRepositoryMock();
-            var logic = new ContactsController(repo.Object);
+            var logic = new ContactService(repo.Object);
 
             // Act
             var response = await logic.CreateContactAsync(name);
@@ -51,8 +52,8 @@ namespace ContactManager.Tests.Logic
         {
             // Arrange
             var repo = GetRepositoryMock();
-            var logic = new ContactsController(repo.Object);
-            var expected = ResponseType.Failiure;
+            var logic = new ContactService(repo.Object);
+            var expected = ServiceResponseType.Failure;
 
 
             // Act
@@ -67,7 +68,7 @@ namespace ContactManager.Tests.Logic
         {
             // Arrange
             var repo = GetRepositoryMock();
-            var logic = new ContactsController(repo.Object);
+            var logic = new ContactService(repo.Object);
 
             // Act
             var response = await logic.CreateContactAsync(name);
@@ -82,8 +83,8 @@ namespace ContactManager.Tests.Logic
         {
             // Arrange
             var repo = GetRepositoryMock();
-            var logic = new ContactsController(repo.Object);
-            var expected = ResponseType.Failiure;
+            var logic = new ContactService(repo.Object);
+            var expected = ServiceResponseType.Failure;
 
             // Act
             var response = await logic.CreateContactAsync(name);
@@ -97,7 +98,7 @@ namespace ContactManager.Tests.Logic
         {
             // Arrange
             var repo = GetRepositoryMock();
-            var logic = new ContactsController(repo.Object);
+            var logic = new ContactService(repo.Object);
 
             // Act
             var response = await logic.CreateContactAsync(name);
@@ -118,14 +119,14 @@ namespace ContactManager.Tests.Logic
                 new Contact() {Name = "bar", ContactId = 1},
             };
             repo.Setup(obj => obj.GetContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
-            var logic = new ContactsController(repo.Object);
+            var logic = new ContactService(repo.Object);
 
             // Act
             var response = await logic.GetContactsAsync();
 
             // Assert
             response.Value.Should().BeEquivalentTo(contacts);
-            response.Type.Should().Be(ResponseType.Success);
+            response.Type.Should().Be(ServiceResponseType.Success);
             repo.Verify(obj => obj.GetContactsAsync(), Times.Once);
         }
 
@@ -136,13 +137,13 @@ namespace ContactManager.Tests.Logic
             var repo = GetRepositoryMock();
             var contacts = new List<Contact>();
             repo.Setup(obj => obj.GetContactsAsync()).Returns(Task<List<Contact>>.FromResult(contacts.AsEnumerable()));
-            var logic = new ContactsController(repo.Object);
+            var logic = new ContactService(repo.Object);
 
             // Act
             var response = await logic.GetContactsAsync();
 
             // Assert
-            response.Type.Should().Be(ResponseType.Failiure);
+            response.Type.Should().Be(ServiceResponseType.Failure);
         }
 
         private Mock<IContactsRepository> GetRepositoryMock()

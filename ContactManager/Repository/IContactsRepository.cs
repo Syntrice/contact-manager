@@ -1,5 +1,4 @@
-﻿using ContactManager.Model;
-
+﻿using ContactManager.Models.ContactModel;
 namespace ContactManager.Repository
 {
     public interface IContactsRepository

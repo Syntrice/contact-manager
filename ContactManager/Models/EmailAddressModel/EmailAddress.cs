@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ContactManager.Models.ContactModel;
+using ContactManager.Models.EmailAddressCategoryModel;
 
-namespace ContactManager.Model
+namespace ContactManager.Models.EmailAddressModel
 {
     public class EmailAddress
     {

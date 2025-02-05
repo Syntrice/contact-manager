@@ -1,4 +1,5 @@
-﻿using ContactManager.Model;
+﻿using ContactManager.Models;
+using ContactManager.Models.EmailAddressCategoryModel;
 
 namespace ContactManager.Repository
 {

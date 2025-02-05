@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ContactManager.Models.ContactModel;
+using ContactManager.Models.PhoneNumberCategoryModel;
 
-namespace ContactManager.Model
+namespace ContactManager.Models.PhoneNumberModel
 {
     public class PhoneNumber
     {
