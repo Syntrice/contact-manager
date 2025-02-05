@@ -2,8 +2,7 @@
 
 namespace ContactManager.ApplicationOptions
 {
-    // TODO: Extract interface to mock this class in unit tests
-    public class ConsoleUIOptions
+    public class ConsoleUIOptions : IConsoleUIOptions
     {
         private Type _startingState = null!;
         public Type StartingState
