@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /Resources/marketplace.drawio
 /Resources/.$entity_relationship_diagram.drawio.bkp
+
+.idea
